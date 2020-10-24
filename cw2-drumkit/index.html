@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drumkit</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+    <audio src="sounds/boom.wav" controls id="boom"></audio>
+    <audio src="sounds/clap.wav" controls id="clap"></audio>
+    <audio src="sounds/hihat.wav" controls id="hihat"></audio>
+    <audio src="sounds/kick.wav" controls id="kick"></audio>
+    <audio src="sounds/openhat.wav" controls id="openhat"></audio>
+    <audio src="sounds/ride.wav" controls id="ride"></audio>
+    <audio src="sounds/snare.wav" controls id="snare"></audio>
+    <audio src="sounds/tink.wav" controls id="tink"></audio>
+    <audio src="sounds/tom.wav" controls id="tom"></audio>
+    <button id="recordBtn" class='recordTrack' data-track='t0'>Record</button>
+    <button id="playBtn" class='playTrack' data-track="t0" disabled>Play</button>
+    <section>
+        Ścieżka 1:
+        <button id='recordBtn-track1' class='recordTrack' data-track='t1'>Record</button>
+        <button id='playBtn-track1' class='playTrack' data-track="t1">Play</button>
+    </section>
+    <section>
+        Ścieżka 2:
+        <button id='recordBtn-track2' class='recordTrack' data-track="t2">Record</button>
+        <button id='playBtn-track2' class='playTrack' data-track="t2">Play</button>
+    </section>
+    <section>
+        Ścieżka 3:
+        <button id='recordBtn-track3' class='recordTrack' data-track="t3">Record</button>
+        <button id='playBtn-track3' class='playTrack' data-track="t3">Play</button>
+    </section>
+    <section>
+        Ścieżka 4:
+        <button id='recordBtn-track4' class='recordTrack' data-track="t4">Record</button>
+        <button id='playBtn-track4' class='playTrack' data-track="t4">Play</button>
+    </section>
+ 
+    <script src="main.js" type="text/javascript"></script>
+</body>
+</html>

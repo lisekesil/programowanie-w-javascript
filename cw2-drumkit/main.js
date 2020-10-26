@@ -120,12 +120,22 @@ const onRecordBtnClick = (ev) => {
         return;
     }
 
-    playTrackButtons.forEach((btn) => (btn.disabled = false));
+    playTrackButtons.forEach((btn) => {
+        if (tracks[btn.dataset.track].length !== 0) btn.disabled = false;
+    });
     recordTrackButtons.forEach((btn) => {
         btn.disabled = false;
         btn.innerHTML = 'Record';
     });
-    playAllButton.disabled = false;
+
+    Object.entries(tracks).forEach((track) => {
+        const [key, value] = track;
+        if (key === 't0') return;
+
+        if (value.length !== 0) {
+            playAllButton.disabled = false;
+        }
+    });
 };
 
 const onPlayBtnClick = (ev) => {

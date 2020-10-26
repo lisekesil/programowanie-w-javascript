@@ -1,9 +1,8 @@
-const recordButton = document.querySelector('#recordBtn');
-const playButton = document.querySelector('#playBtn');
 const recordTrackButtons = document.querySelectorAll('.recordTrack');
 const playTrackButtons = document.querySelectorAll('.playTrack');
+const playAllButton = document.querySelector('.playAllTracks');
 
-let recordStartTime;
+const sounds = document.querySelectorAll('.sound');
 
 const tracks = {
     t0: [],
@@ -13,6 +12,7 @@ const tracks = {
     t4: [],
 };
 
+let recordStartTime;
 let currentTrack;
 let isRecording = false;
 
@@ -61,9 +61,18 @@ const onKeyPress = (ev) => {
 };
 
 const playSound = (id) => {
-    const sound = document.querySelector('#' + id);
-    sound.currentTime = 0;
-    sound.play();
+    const audio = document.querySelector('#' + id);
+    audio.currentTime = 0;
+    audio.play();
+
+    sounds.forEach((sound) => {
+        if (id == sound.textContent) {
+            sound.parentElement.classList.add('soundActive');
+            setTimeout(() => {
+                sound.parentElement.classList.remove('soundActive');
+            }, 150);
+        }
+    });
 };
 
 const recordSound = (track, soundObj) => {
@@ -107,7 +116,7 @@ const onRecordBtnClick = (ev) => {
         recordTrackButtons.forEach((btn) => {
             btn.dataset.track == currentTrack ? (btn.innerHTML = 'Stop') : (btn.disabled = true);
         });
-
+        playAllButton.disabled = true;
         return;
     }
 
@@ -116,12 +125,20 @@ const onRecordBtnClick = (ev) => {
         btn.disabled = false;
         btn.innerHTML = 'Record';
     });
+    playAllButton.disabled = false;
 };
 
 const onPlayBtnClick = (ev) => {
     const track = ev.target.dataset.track;
 
     playTrack(track);
+};
+
+const playAll = () => {
+    playTrack('t1');
+    playTrack('t2');
+    playTrack('t3');
+    playTrack('t4');
 };
 
 document.body.addEventListener('keypress', onKeyPress);
@@ -131,3 +148,4 @@ recordTrackButtons.forEach((btn) => {
 playTrackButtons.forEach((btn) => {
     btn.addEventListener('click', (ev) => onPlayBtnClick(ev));
 });
+playAllButton.addEventListener('click', playAll);

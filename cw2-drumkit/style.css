@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.bg-image {
+    background-image: url('./konsola.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(3px) brightness(75%);
+    transform: scale(1.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -99;
+}
+
+.keys {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.key {
+    width: 115px;
+    height: 90px;
+    margin: 13px;
+    border: 1px solid black;
+    background-color: rgb(56, 0, 60);
+    color: rgb(0, 255, 133);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 25px;
+    opacity: 0.75;
+    transition: all 0.1s ease-in;
+}
+
+.soundActive {
+    transform: scale(1.2);
+    box-shadow: 0px 0px 12px 2px rgb(0, 255, 133, 1);
+    opacity: 1;
+}
+
+.sound {
+    font-size: 16px;
+}
+
+.btnTrack,
+.btnGeneral,
+.playAllTracks {
+    width: 180px;
+    height: 75px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    font-family: inherit;
+    font-size: 22px;
+    cursor: pointer;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.btnGeneral:disabled,
+.btnTrack:disabled,
+.playAllTracks:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.recordTrack {
+    color: rgb(233, 0, 82);
+    border: 3px solid rgb(233, 0, 82);
+
+    transition: all 0.15s ease-in;
+}
+
+.recordTrack:hover {
+    background-color: rgba(0, 0, 0, 1);
+    transform: scale(1.1);
+}
+
+.playTrack,
+.playAllTracks {
+    color: rgb(0, 255, 133);
+    border: 3px solid rgb(0, 255, 133);
+    transition: all 0.15s ease-in;
+}
+.playTrack:hover,
+.playAllTracks:hover {
+    background-color: rgba(0, 0, 0, 1);
+    transform: scale(1.1);
+}
+
+.btnGeneral.recordTrack {
+    position: absolute;
+    top: 50px;
+    left: 5%;
+}
+
+.btnGeneral.playTrack {
+    position: absolute;
+    top: 150px;
+    left: 5%;
+}
+
+.btnTrack {
+    width: 120px;
+    height: 55px;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.tracks {
+    position: absolute;
+    bottom: 25%;
+    right: 5%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    color: #fff;
+    text-align: end;
+}
+
+.track {
+    margin-bottom: 20px;
+}

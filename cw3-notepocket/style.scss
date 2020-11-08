@@ -33,6 +33,12 @@ body {
         font-size: 7.5rem;
     }
 
+    // &__form {
+    //     position: relative;
+    //     width: 300px;
+    //     margin: 10% auto;
+    // }
+
     &__title {
         background-color: #faed56;
         width: 300px;
@@ -65,24 +71,64 @@ body {
             color: #555555;
         }
     }
+
+    &__colors {
+        width: 300px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 20px auto;
+    }
+
+    &__color {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        // border: 1px dotted black;
+
+        &--active {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgb(117, 117, 117);
+        }
+
+        &--green {
+            background-color: #e2ffbf;
+        }
+        &--red {
+            background-color: #ff6666;
+        }
+        &--blue {
+            background-color: #66b5ff;
+        }
+        &--pink {
+            background-color: #ff90ed;
+        }
+        &--mint {
+            background-color: #63ffa1;
+        }
+    }
 }
 
 .notes {
     // width: 100%;
     display: grid;
     // justify-content: center;
-    align-items: center;
-    grid-template-columns: repeat(3, minmax(200px, auto));
+    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
     gap: 60px 50px;
-    margin: 50px 100px;
+    margin: 50px auto;
 }
 
 .note {
-    width: 300px;
+    width: 250px;
     min-height: 200px;
     background: #e2ffbf;
     padding: 15px;
     // overflow: scroll;
+    // border: 1px solid black;
+    border-radius: 7px;
+    position: relative;
 
     &__title {
         font-size: 2rem;
@@ -91,5 +137,28 @@ body {
     &__content {
         font-size: 1.3rem;
         margin: 10px;
+    }
+
+    &__footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 0 15px;
+        // justify-self: flex-end;
+
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+    }
+
+    &__date {
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    &__img {
+        width: 24px;
+        height: 24px;
     }
 }

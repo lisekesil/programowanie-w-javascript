@@ -101,23 +101,71 @@ body {
   color: #555555;
 }
 
-.notes {
-  display: -ms-grid;
-  display: grid;
+.creation__colors {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-grid-columns: (minmax(200px, auto))[3];
-      grid-template-columns: repeat(3, minmax(200px, auto));
+  margin: 20px auto;
+}
+
+.creation__color {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.creation__color--active {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #757575;
+}
+
+.creation__color--green {
+  background-color: #e2ffbf;
+}
+
+.creation__color--red {
+  background-color: #ff6666;
+}
+
+.creation__color--blue {
+  background-color: #66b5ff;
+}
+
+.creation__color--pink {
+  background-color: #ff90ed;
+}
+
+.creation__color--mint {
+  background-color: #63ffa1;
+}
+
+.notes {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
   gap: 60px 50px;
-  margin: 50px 100px;
+  margin: 50px auto;
 }
 
 .note {
-  width: 300px;
+  width: 250px;
   min-height: 200px;
   background: #e2ffbf;
   padding: 15px;
+  border-radius: 7px;
+  position: relative;
 }
 
 .note__title {
@@ -127,5 +175,32 @@ body {
 .note__content {
   font-size: 1.3rem;
   margin: 10px;
+}
+
+.note__footer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding: 0 15px;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+}
+
+.note__date {
+  font-weight: 700;
+  font-style: italic;
+}
+
+.note__img {
+  width: 24px;
+  height: 24px;
 }
 /*# sourceMappingURL=style.css.map */

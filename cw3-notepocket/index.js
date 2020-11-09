@@ -17,7 +17,7 @@ const pinned = ui.qs(ui.UiSelectors.pinnedCheckbox);
 
 noteAdd.addEventListener('click', () => {
     notes.addNote(new Note(title.value, content.value, color.value, pinned.checked));
-    deleteBtns = ui.qsAll(ui.UiSelectors.deleteBtn);
+    // deleteBtns = ui.qsAll(ui.UiSelectors.deleteBtn);
 });
 
 deleteBtns.forEach((btn) => {

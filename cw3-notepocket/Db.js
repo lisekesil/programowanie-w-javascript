@@ -9,12 +9,14 @@ export default class Db {
 
     getNotes() {
         const notesFromStorage = JSON.parse(localStorage.getItem(this.notesLSKey));
+        if (notesFromStorage) {
+            const notes = notesFromStorage.map((note) => {
+                note.createDate = new Date(note.createDate);
+                return note;
+            });
 
-        const notes = notesFromStorage.map((note) => {
-            note.createDate = new Date(note.createDate);
-            return note;
-        });
-
-        return notes;
+            return notes;
+        }
+        return;
     }
 }

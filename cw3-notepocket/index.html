@@ -11,41 +11,64 @@
         <section class="creation">
             <h1 class="creation__logo">notas</h1>
     
-            <!-- <form class="creation__form"> -->
+            <form class="creation__form">
                 <input class="creation__title" type="text" name="title" placeholder="Dodaj tytuł..." data-titleInput><br>
                 <textarea class="creation__textarea"  placeholder="Dodaj tekst..." data-contentInput></textarea><br>
-                <input class="creation__color" type="color" value="#e2ffbf" data-colorInput>
-                <!-- <div class="creation__colors">
-                    <div class='creation__color creation__color--green creation__color--active'></div>
-                    <div class='creation__color creation__color--red'></div>
-                    <div class='creation__color creation__color--blue'></div>
-                    <div class='creation__color creation__color--mint'></div>
-                    <div class='creation__color creation__color--pink'></div>
-                </div> -->
-                <input type="checkbox" id="pinned" name="pinned"
-                checked data-pinnedCheckbox>
-                <label for="pinned">Przypnij</label>
+                <div class='creation__options'>
+
+                    <div>
+                        <label for="color" class='creation__label'>Kolor:</label>
+                        <input class="creation__color" id='color' type="color" value="#e2ffbf" data-colorInput>
+                    </div>
+     
+                    <div>
+    
+                        <input type="checkbox" id="pinned" name="pinned"
+                         data-pinnedCheckbox>
+                        <label for="pinned" class='creation__label'>Przypnij</label>
+                    </div>
+                </div>
     
                 
-                <button type='button' class="creation__btn" id="noteAdd">Add</button>
-            <!-- </form> -->
+                <button type='button' class="creation__btn" id="noteAdd">Zapisz</button>
+            </form>
         </section>
-        <section class='notes' data-notes>
+        <article>
 
-            <!-- <div class='note'>
-                <h2 class='note__title'>
-                    Lista zakupów
-                </h2>
-                <p class ='note__content'>
-                    1.mleko<br>2.cola
-                </p>
-                <div class='note__footer'>
-                    <img class='note__img' src="./edit.png"></img>
-                    <h4 class='note__date'>8.11.2020, 17:18:55</h4>
-                    <img class='note__img' src="./delete.png"></img>
-                </div>
-            </div> -->
-        </section>
+            <!-- <h2>PRZYPIĘTE</h2> -->
+            <section class='pinnedNotes'>
+    
+                             <!-- <div class='note'>
+                                <h2 class='note__title'>
+                                    Lista zakupów
+                                </h2>
+                                <p class ='note__content'>
+                                    1.mleko<br>2.cola
+                                </p>
+                                <div class='note__footer'>
+                                    <img class='note__img' src="./edit.png"></img>
+                                    <h4 class='note__date'>8.11.2020, 17:18:55</h4>
+                                    <img class='note__img' src="./delete.png"></img>
+                                </div>
+                            </div>  -->
+            </section>
+            <section class='notes' data-notes>
+    
+                <!-- <div class='note'>
+                    <h2 class='note__title'>
+                        Lista zakupów
+                    </h2>
+                    <p class ='note__content'>
+                        1.mleko<br>2.cola
+                    </p>
+                    <div class='note__footer'>
+                        <img class='note__img' src="./edit.png"></img>
+                        <h4 class='note__date'>8.11.2020, 17:18:55</h4>
+                        <img class='note__img' src="./delete.png"></img>
+                    </div>
+                </div> -->
+            </section>
+        </article>
     </main>
     <script src='index.js' type="module"></script>
 </body>

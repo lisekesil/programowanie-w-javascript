@@ -4,6 +4,7 @@ export default class NotesUI extends UI {
     constructor(containerSelector) {
         super();
         this.container = this.qs(containerSelector);
+        this.pinnedContainer = this.qs('.pinnedNotes');
     }
 
     renderNotes(notes) {
@@ -49,6 +50,10 @@ export default class NotesUI extends UI {
         htmlSection.appendChild(htmlContent);
         htmlSection.appendChild(htmlFooter);
 
-        this.container.appendChild(htmlSection);
+        if (note.pinned) {
+            this.pinnedContainer.insertAdjacentElement('afterbegin', htmlSection);
+        } else {
+            this.container.insertAdjacentElement('afterbegin', htmlSection);
+        }
     }
 }

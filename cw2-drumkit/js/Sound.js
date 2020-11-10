@@ -1,8 +1,9 @@
-const sounds = document.querySelectorAll('.sound');
+// const sounds = document.querySelectorAll('.sound');
 export default class Sound {
     constructor(soundName, recordStartTime) {
         this.soundName = soundName;
         this.time = Date.now() - recordStartTime;
+        this.sounds = document.querySelectorAll('.sound');
     }
 
     playSound() {
@@ -10,7 +11,11 @@ export default class Sound {
         audio.currentTime = 0;
         audio.play();
 
-        sounds.forEach((sound) => {
+        this.playSoundEffect();
+    }
+
+    playSoundEffect() {
+        this.sounds.forEach((sound) => {
             if (this.soundName == sound.textContent) {
                 sound.parentElement.classList.add('soundActive');
                 setTimeout(() => {

@@ -10,6 +10,7 @@
     <main class='wrapper'>
         <section class="creation">
             <h1 class="creation__logo">notas</h1>
+            <span data-noteID></span>
     
             <form class="creation__form">
                 <input class="creation__title" type="text" name="title" placeholder="Dodaj tytuł..." data-titleInput><br>
@@ -29,14 +30,17 @@
                     </div>
                 </div>
     
-                
-                <button type='button' class="creation__btn" id="noteAdd">Zapisz</button>
+                <div>
+
+                    <button type='button' class="creation__btn" data-addBtn >Dodaj</button>
+                    <button type='button' class="creation__btn" data-saveEditBtn disabled>Edytuj</button>
+                </div>
             </form>
         </section>
         <article>
 
             <!-- <h2>PRZYPIĘTE</h2> -->
-            <section class='pinnedNotes'>
+            <section class='pinnedNotes' data-pinnedNotes>
     
                              <!-- <div class='note'>
                                 <h2 class='note__title'>

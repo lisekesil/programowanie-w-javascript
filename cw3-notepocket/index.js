@@ -6,23 +6,19 @@ const ui = new UI();
 const notes = new Notes();
 notes.init();
 
-let deleteBtns = ui.qsAll(ui.UiSelectors.deleteBtn);
-
-const noteAdd = document.querySelector('#noteAdd');
+const noteAdd = ui.qs(ui.UiSelectors.addBtn);
+const noteEdit = ui.qs(ui.UiSelectors.saveEditBtn);
 
 const title = ui.qs(ui.UiSelectors.titleInput);
 const content = ui.qs(ui.UiSelectors.contentInput);
 const color = ui.qs(ui.UiSelectors.colorInput);
 const pinned = ui.qs(ui.UiSelectors.pinnedCheckbox);
+const noteID = ui.qs(ui.UiSelectors.noteID);
 
 noteAdd.addEventListener('click', () => {
     notes.addNote(new Note(title.value, content.value, color.value, pinned.checked));
-    // deleteBtns = ui.qsAll(ui.UiSelectors.deleteBtn);
 });
 
-deleteBtns.forEach((btn) => {
-    btn.addEventListener('click', (ev) => {
-        const id = ev.target.dataset.id;
-        notes.removeNote(id);
-    });
+noteEdit.addEventListener('click', () => {
+    notes.saveEditedNote(noteID.innerHTML);
 });

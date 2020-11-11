@@ -1,14 +1,34 @@
 import UI from './UI.js';
 
 export default class NotesUI extends UI {
-    constructor(containerSelector) {
+    constructor(containerSelector, pinnedContainerSelector) {
         super();
         this.container = this.qs(containerSelector);
-        this.pinnedContainer = this.qs('.pinnedNotes');
+        this.pinnedContainer = this.qs(pinnedContainerSelector);
+
+        this.title = this.qs(this.UiSelectors.titleInput);
+        this.content = this.qs(this.UiSelectors.contentInput);
+        this.color = this.qs(this.UiSelectors.colorInput);
+        this.pinned = this.qs(this.UiSelectors.pinnedCheckbox);
+        this.noteID = this.qs(this.UiSelectors.noteID);
+
+        this.addBtn = this.qs(this.UiSelectors.addBtn);
+        this.saveEditBtn = this.qs(this.UiSelectors.saveEditBtn);
+    }
+
+    switchDisabledBtns(isEdit) {
+        if (isEdit) {
+            this.addBtn.disabled = true;
+            this.saveEditBtn.disabled = false;
+        } else {
+            this.addBtn.disabled = false;
+            this.saveEditBtn.disabled = true;
+        }
     }
 
     renderNotes(notes) {
         this.container.innerHTML = '';
+        this.pinnedContainer.innerHTML = '';
         notes.forEach((note) => {
             this.renderHtmlNote(note);
         });
@@ -36,7 +56,9 @@ export default class NotesUI extends UI {
         htmlDate.innerHTML = note.createDate.toLocaleString();
         htmlSection.id = note.id;
         htmlImgDelete.setAttribute('data-id', note.id);
+        htmlImgEdit.setAttribute('data-id', note.id);
         htmlImgDelete.setAttribute('data-deleteBtn', '');
+        htmlImgEdit.setAttribute('data-editBtn', '');
 
         htmlImgEdit.src = './edit.png';
         htmlImgDelete.src = './delete.png';
@@ -55,5 +77,13 @@ export default class NotesUI extends UI {
         } else {
             this.container.insertAdjacentElement('afterbegin', htmlSection);
         }
+    }
+
+    clearForm() {
+        this.title.value = '';
+        this.content.value = '';
+        this.color.value = '#e2ffbf';
+        this.pinned.checked = false;
+        this.noteID.innerHTML = '';
     }
 }

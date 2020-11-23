@@ -1,40 +1,57 @@
-window.addEventListener('deviceorientation', onDeviceMove);
+import Ball from './Ball.js';
+import Hole from './Hole.js';
 
-const ballElement = document.querySelector('.ball');
-const ball = {
-    x: 10,
-    y: 10,
-};
-
-let speedX = 0,
-    speedY = 0;
-
-function porusz() {
-    if (ball.x + speedX < window.innerWidth - 60 && ball.x + speedX > 0) {
-        ball.x += speedX;
-        ballElement.style.left = ball.x + 'px';
-    }
-    if (ball.y + speedY < window.innerHeight - 60 && ball.y + speedY > 0) {
-        ball.y += speedY;
-        ballElement.style.top = ball.y + 'px';
+class Game {
+    constructor() {
+        this.ball = new Ball();
+        this.holes = [];
+        this.gameWidth = null;
+        this.gameHeight = null;
+        this.ballElement = document.querySelector('.ball');
+        this.startTime = null;
+        this.endTime = null;
     }
 
-    window.requestAnimationFrame(porusz);
+    init() {
+        window.addEventListener('deviceorientation', (ev) => this.ball.ballSpeed(ev));
+
+        this.startTime = Date.now();
+        this.gameHeight = window.innerHeight - 60;
+        this.gameWidth = window.innerWidth - 60;
+        const hole = new Hole(200, 300);
+
+        this.holes.push(hole);
+
+        this.holes.forEach((hole) => hole.renderHole());
+    }
+
+    moveBall() {
+        if (this.ball.x + this.ball.speedX < this.gameWidth && this.ball.x + this.ball.speedX > 0) {
+            this.ball.x += this.ball.speedX;
+            this.ballElement.style.left = this.ball.x + 'px';
+        }
+        if (
+            this.ball.y + this.ball.speedY < this.gameHeight &&
+            this.ball.y + this.ball.speedY > 0
+        ) {
+            this.ball.y += this.ball.speedY;
+            this.ballElement.style.top = this.ball.y + 'px';
+        }
+        this.holes.forEach((hole) => {
+            const a = hole.x + 40 - Math.floor(this.ball.x + 25);
+            const b = hole.y + 40 - Math.floor(this.ball.y + 25);
+            const c = Math.sqrt(a * a + b * b);
+
+            if (25 > c) {
+                this.endTime = Date.now();
+                alert(`${(this.endTime - this.startTime) / 1000} sekund`);
+            }
+        });
+
+        window.requestAnimationFrame(() => this.moveBall());
+    }
 }
 
-function onDeviceMove(ev) {
-    if (ev.alpha > 0) {
-        speedX = ev.gamma / 30;
-    } else if (ev.alpha < 0) {
-        speedX = ev.gamma / 30;
-    }
-
-    if (ev.beta > 0) {
-        speedY = ev.beta / 30;
-    } else if (ev.beta < 0) {
-        speedY = ev.beta / 30;
-    }
-}
-porusz();
-
-// gameInit();
+const game = new Game();
+game.init();
+game.moveBall();

@@ -5,7 +5,9 @@ class Snow {
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
         this.flakes = [];
-        this.numOfFlakes = 1500;
+        this.numOfFlakes = 400;
+        this.waves = 5;
+        this.interval = null;
     }
 
     init() {
@@ -13,10 +15,10 @@ class Snow {
         this.ctx.canvas.height = window.innerHeight;
         this.ctx.fillStyle = 'rgb(20,20,20)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-        for (let i = 0; i < this.numOfFlakes; i++) {
-            this.flakes.push(new Snowflake(Math.random() * window.innerWidth));
-        }
+        this.makeSnowflakes();
+        this.interval = setInterval(() => {
+            this.makeSnowflakes();
+        }, 5000);
         this.draw();
     }
 
@@ -36,6 +38,17 @@ class Snow {
         this.update();
 
         window.requestAnimationFrame(() => this.draw());
+    }
+
+    makeSnowflakes() {
+        if (this.flakes.length >= this.numOfFlakes * this.waves) {
+            clearInterval(this.interval);
+            return;
+        }
+        for (let i = 0; i < this.numOfFlakes; i++) {
+            const snowflake = new Snowflake(Math.random() * window.innerWidth);
+            this.flakes.push(snowflake);
+        }
     }
 
     update() {

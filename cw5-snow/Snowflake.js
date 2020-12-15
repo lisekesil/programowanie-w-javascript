@@ -1,10 +1,10 @@
 export default class Snowflake {
-    constructor(x) {
-        this.x = x;
-        this.y = -100;
+    constructor() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = -200;
         this.radius = Math.random() * 10;
-        this.speedY = Math.random() * 3;
-        this.speedX = Math.random();
+        this.speedY = (Math.random() + 0.5) * 2;
+        this.speedX = Math.random() + 0.5;
         this.opacity = Math.random();
         this.direction = Math.random();
     }
@@ -16,6 +16,11 @@ export default class Snowflake {
             this.x += this.speedX;
         } else {
             this.x -= this.speedX;
+        }
+
+        if (this.y > window.innerHeight || this.x < 0 || this.x > window.innerWidth) {
+            this.x = Math.random() * window.innerWidth;
+            this.y = -10;
         }
     }
 }

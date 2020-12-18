@@ -1,27 +1,30 @@
 import City from './City.js';
 import Db from './Db.js';
+import WeatherUi from './WeatherUi.js';
 
 class WeatherApp {
     constructor() {
         this.API_KEY = 'dc7951fe1d80006952ad09468447f61b';
 
+        this.weatherUi = new WeatherUi(document.querySelector('.container'));
         this.db = new Db();
-        this.cityInput = document.querySelector('.searchbar__input');
-        this.searchBtn = document.querySelector('.searchbar__btn');
+
         this.cities = [];
+        this.citiesObjects = [];
     }
 
     init() {
-        this.searchBtn.addEventListener('click', () => this.searchCity());
+        this.weatherUi.searchBtn.addEventListener('click', () => this.searchCity());
+
         const citiesFromLs = this.db.getCities();
         if (citiesFromLs) {
             this.cities = [...citiesFromLs];
-            this.cities.forEach((city) => this.renderCityTile(city));
+            this.cities.forEach((city) => this.searchCity(city));
         }
     }
 
-    searchCity() {
-        const city = this.cityInput.value;
+    searchCity(cityName) {
+        const city = cityName ? cityName : this.weatherUi.cityInput.value;
         const cityData = fetch(
             `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}&units=metric&lang=pl`
         );
@@ -31,27 +34,29 @@ class WeatherApp {
                 return resp.json();
             })
             .then((response) => {
-                console.log(response);
-                const newCity = new City(response.name, response.main.temp);
-                this.cities.push(newCity);
+                const newCity = new City(
+                    response.name,
+                    response.main.temp,
+                    response.main.pressure,
+                    response.main.humidity,
+                    response.main.feels_like,
+                    response.weather[0].description,
+                    response.weather[0].icon
+                );
+
+                if (!this.cities.includes(response.name)) {
+                    this.cities.push(response.name);
+                }
+                this.citiesObjects.push(newCity);
+
                 console.log(this.cities);
-                this.renderCityTile(newCity);
+
+                this.weatherUi.renderCityTile(newCity);
                 this.db.saveCities(this.cities);
             })
             .catch(() => {
                 alert('BŁĄD! Spróbuj jeszcze raz.');
             });
-    }
-
-    renderCityTile(cityObj) {
-        const template = `
-            <div>
-                <h1>${cityObj.city}</h1>
-                <span>${cityObj.temp}°C</span>
-            </div>
-        `;
-
-        document.body.insertAdjacentHTML('beforeend', template);
     }
 }
 

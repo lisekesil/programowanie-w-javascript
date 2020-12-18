@@ -26,6 +26,6 @@ export default class WeatherUi {
         </div>
         `;
 
-        this.container.insertAdjacentHTML('beforeend', template);
+        this.container.insertAdjacentHTML('afterbegin', template);
     }
 }

@@ -10,12 +10,7 @@ export default class Db {
     getCities() {
         const citiesFromStorage = JSON.parse(localStorage.getItem(this.citiesLSKey));
         if (citiesFromStorage) {
-            const cities = citiesFromStorage.map((city) => {
-                city.createDate = new Date(city.createDate);
-                return city;
-            });
-
-            return cities;
+            return citiesFromStorage;
         }
         return;
     }

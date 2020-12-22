@@ -10,7 +10,6 @@ export default class WeatherApp {
         this.db = new Db();
 
         this.cities = [];
-        this.citiesObjects = [];
     }
 
     init() {
@@ -48,17 +47,19 @@ export default class WeatherApp {
                     response.main.humidity,
                     response.main.feels_like,
                     response.weather[0].description,
-                    response.weather[0].icon
+                    response.weather[0].icon,
+                    response.dt,
+                    response.timezone,
+                    response.coord.lat,
+                    response.coord.lon
                 );
 
                 if (!this.cities.includes(response.name)) {
                     this.cities.push(response.name);
                 }
-                this.citiesObjects.push(newCity);
-
-                console.log(this.cities);
 
                 this.weatherUi.renderCityTile(newCity);
+                this.addEventListeners(newCity);
                 this.db.saveCities(this.cities);
             })
             .catch(() => {
@@ -66,5 +67,63 @@ export default class WeatherApp {
             });
 
         this.weatherUi.cityInput.value = '';
+    }
+
+    addEventListeners(city) {
+        const dailyIcons = document.querySelectorAll('[data-city]');
+        dailyIcons.forEach((icon) => {
+            if (city.city === icon.dataset.city)
+                icon.addEventListener('click', () => {
+                    this.showForecast(city);
+                });
+        });
+
+        const deleteCities = document.querySelectorAll('[data-deleteCity]');
+        deleteCities.forEach((deleteCity) => {
+            if (city.city === deleteCity.dataset.deletecity) {
+                deleteCity.addEventListener('click', () => {
+                    const updatedCities = this.cities.filter(
+                        (el) => el !== deleteCity.dataset.deletecity
+                    );
+                    this.cities = updatedCities;
+                    this.db.saveCities(this.cities);
+
+                    this.weatherUi.container.innerHTML = '';
+                    this.cities.forEach((city) => this.searchCity(city));
+                });
+            }
+        });
+    }
+
+    showForecast(city) {
+        const forecast = fetch(
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&units=metric&lang=pl&exclude=hourly&appid=${this.API_KEY}`
+        );
+        forecast
+            .then((res) => res.json())
+            .then((res) => {
+                this.weatherUi.modal.innerHTML = '';
+                this.weatherUi.modal.style.display = 'flex';
+                for (let i = 0; i < 6; i++) {
+                    const daily = res.daily[i];
+                    const timezone = res.timezone_offset;
+
+                    const day = {
+                        date: new Date((daily.dt + timezone) * 1000 - 3600000),
+                        icon: daily.weather[0].icon,
+                        desc: daily.weather[0].description,
+                        temp: Math.round(daily.temp.day),
+                    };
+
+                    this.weatherUi.renderDayTile(day);
+                }
+            })
+            .catch(() => {
+                console.log('error');
+            });
+
+        this.weatherUi.modal.addEventListener('click', (ev) => {
+            if (ev.target == this.weatherUi.modal) this.weatherUi.modal.style.display = 'none';
+        });
     }
 }

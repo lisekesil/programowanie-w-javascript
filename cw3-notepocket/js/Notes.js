@@ -1,10 +1,13 @@
 import Db from './Db.js';
 import NotesUI from './NotesUI.js';
+import Note from './Note.js';
+import UI from './UI.js';
 
 export default class Notes {
     constructor() {
         this.notesArr = [];
         this.db = new Db();
+        this.ui = new UI();
         this.notesUi = new NotesUI('[data-notes]', '[data-pinnedNotes]');
 
         this.isEdit = false;
@@ -17,6 +20,21 @@ export default class Notes {
             this.notesUi.renderNotes(this.notesArr);
             this.addEventListeners();
         }
+
+        this.notesUi.addBtn.addEventListener('click', () => {
+            this.addNote(
+                new Note(
+                    this.notesUi.title.value,
+                    this.notesUi.content.value,
+                    this.notesUi.color.value,
+                    this.notesUi.pinned.checked
+                )
+            );
+        });
+
+        this.notesUi.saveEditBtn.addEventListener('click', () => {
+            this.saveEditedNote(this.notesUi.noteID.innerHTML);
+        });
     }
 
     addNote(note) {

@@ -61,6 +61,8 @@ body {
   font-weight: 700;
   border: none;
   margin: 50px auto 10px;
+  -webkit-filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .creation__title::-webkit-input-placeholder {
@@ -91,6 +93,8 @@ body {
   padding: 20px;
   font-size: 1.5rem;
   border: none;
+  -webkit-filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .creation__textarea::-webkit-input-placeholder {
@@ -164,19 +168,20 @@ body {
 }
 
 article {
-  margin: 0 auto;
+  width: 100%;
 }
 
 .pinnedNotes {
-  border-bottom: 1px solid black;
+  width: 100%;
+  padding: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 .notes {
@@ -192,13 +197,15 @@ article {
 }
 
 .note {
-  width: 250px;
-  min-height: 200px;
+  width: 300px;
+  min-height: 250px;
   background: #e2ffbf;
   padding: 15px;
   margin: 20px;
   border-radius: 7px;
   position: relative;
+  -webkit-filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .note__title {
@@ -207,9 +214,12 @@ article {
 }
 
 .note__content {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  font-weight: 500;
   padding: 10px;
   word-break: break-word;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
 
 .note__footer {
@@ -235,7 +245,13 @@ article {
 }
 
 .note__img {
+  cursor: pointer;
   width: 20px;
   height: 20px;
+  opacity: 0.5;
+}
+
+.note__img:hover {
+  opacity: 1;
 }
 /*# sourceMappingURL=style.css.map */

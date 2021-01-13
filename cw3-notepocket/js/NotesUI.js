@@ -73,6 +73,9 @@ export default class NotesUI extends UI {
         htmlSection.appendChild(htmlFooter);
 
         if (note.pinned) {
+            const htmlPin = document.createElement('img');
+            htmlPin.src = './push-pin.png';
+            htmlTitle.insertAdjacentElement('afterbegin', htmlPin);
             this.pinnedContainer.insertAdjacentElement('afterbegin', htmlSection);
         } else {
             this.container.insertAdjacentElement('afterbegin', htmlSection);

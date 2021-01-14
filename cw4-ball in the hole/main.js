@@ -5,8 +5,8 @@ class Game {
     constructor() {
         this.ball = new Ball();
         this.holes = [];
-        this.gameWidth = null;
-        this.gameHeight = null;
+        this.gameHeight = window.innerHeight - 60;
+        this.gameWidth = window.innerWidth - 60;
         this.ballElement = document.querySelector('.ball');
         this.startTime = null;
         this.endTime = null;
@@ -16,9 +16,8 @@ class Game {
         window.addEventListener('deviceorientation', (ev) => this.ball.ballSpeed(ev));
 
         this.startTime = Date.now();
-        this.gameHeight = window.innerHeight - 60;
-        this.gameWidth = window.innerWidth - 60;
-        const hole = new Hole(200, 300);
+
+        const hole = new Hole(Math.random() * this.gameHeight, Math.random() * this.gameWidth);
 
         this.holes.push(hole);
 

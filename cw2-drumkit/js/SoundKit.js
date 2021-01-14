@@ -99,6 +99,7 @@ export default class SoundKit extends UI {
         }
     }
 
+    //UI
     startRecording() {
         this.playTrackButtons.forEach((btn) => (btn.disabled = true));
         this.recordTrackButtons.forEach((btn) => {
@@ -109,6 +110,7 @@ export default class SoundKit extends UI {
         this.playAllButton.disabled = true;
     }
 
+    //UI
     stopRecording() {
         this.playTrackButtons.forEach((btn) => {
             if (this.tracks[btn.dataset.track].soundsArr.length !== 0) btn.disabled = false;

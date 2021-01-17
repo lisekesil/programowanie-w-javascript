@@ -1,5 +1,5 @@
 export default class Ball {
-    constructor(x = 10, y = 10) {
+    constructor(x = 50, y = 50) {
         this.x = x;
         this.y = y;
         this.speedX = 0;
